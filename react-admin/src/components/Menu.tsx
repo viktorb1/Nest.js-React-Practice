@@ -11,6 +11,16 @@ const Menu = () => {
                     Users
                 </NavLink>
                 </li>
+                <li className="nav-item">
+                <NavLink to={'/products'} className="nav-link active">
+                    Products
+                </NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink to={'/orders'} className="nav-link active">
+                    Orders
+                </NavLink>
+                </li>
             </ul>
             </div>
       </nav>

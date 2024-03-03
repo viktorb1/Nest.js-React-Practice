@@ -18,7 +18,7 @@ const Links = (props: any) => {
         setLinks(data)
         console.log("alsdkjf")
         })();
-    }, [])
+    }, [id])
 
     return (
         <div>

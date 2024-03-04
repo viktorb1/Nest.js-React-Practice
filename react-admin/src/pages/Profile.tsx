@@ -3,9 +3,9 @@ import Layout from '../components/Layout';
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
 import { User } from '../models/user';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/actions/setUserAction';
-import { Dispatch } from 'redux';
+// import { Dispatch } from 'redux';
 
 const Profile = (props: any) => {
     const [first_name, setFirstName] = useState('');
@@ -13,17 +13,20 @@ const Profile = (props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password_confirm, setPasswordConfirm] = useState('');
+    const {user} = useSelector((state: {userlol2: {user: User}}) => state.userlol2);
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         (
             async () => {
                     // const { data } = await axios.get("user");
-                    setFirstName(props.user.first_name)
-                    setLastName(props.user.last_name)
-                    setEmail(props.user.email)
+                    setFirstName(user.first_name)
+                    setLastName(user.last_name)
+                    setEmail(user.email)
             }
         )();
-        }, [props.user]);
+        }, [user]);
 
     const infoSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
@@ -34,8 +37,8 @@ const Profile = (props: any) => {
             email
         })
 
-        props.setUser(data)
-
+        // props.setUser(data)
+        dispatch(setUser(data))
     }
 
     const passwordSubmit = async (e: SyntheticEvent) => {
@@ -78,13 +81,13 @@ const Profile = (props: any) => {
 }
 
 
-const mapStateToProps = (state: {user: User}) => ({
-    user: state.user
-})
+// const mapStateToProps = (state: {user: User}) => ({
+//     user: state.user
+// })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    setUser: (user: User) => dispatch(setUser(user))
-})
+// const mapDispatchToProps = (dispatch: Dispatch) => ({
+//     setUser: (user: User) => dispatch(setUser(user))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-// export default Profile;
+// export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default Profile;

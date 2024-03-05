@@ -16,8 +16,8 @@ const Nav = (props: any) => {
         <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Company name</a>
 
         <ul className="my-2 my-md-0 mr-md-3">
-            <Link to={'/profile'} className="p-2 text-white text-decoration-none">{user.first_name} {user.last_name}</Link>
             <Link to={'/login'} className="p-2 text-white text-decoration-none"
+            <Link to={'/profile'} className="p-2 text-white text-decoration-none">{user.first_name} {user.last_name}</Link>
               // onClick={logout}
               onClick={async () => await axios.post('logout')}
             >Sign out</Link>

@@ -1,20 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { User } from '../models/user'
 
-const Header = () => {
+const Header = (props: {user: User}) => {
+  const [title, setTitle ] = useState('Welcome')
+  const [description, setDescription ] = useState('Share links to earn money')
+
+  useEffect(() => {
+    if (props.user?.id) {
+      setTitle(`$${props.user.revenue}`)
+      setDescription(`You have earned this far`);
+    } else {
+      setTitle("Welcome")
+      setDescription("Share links to earn money")
+    }
+  }, [props.user])
+
+  let buttons;
+
+  if (!props.user?.id) {
+    buttons = (
+      <p>
+        <Link to={"/login"} className="my-2 btn btn-primary">Login</Link>
+        <Link to={"/register"} className="my-2 btn btn-secondary">Register</Link>
+      </p>
+    )
+  }
+
   return (
     <section className="container py-5 text-center">
       <div className="row py-lg-5">
         <div className="mx-auto col-lg-6 col-md-8">
-          <h1 className="fw-light">Album example</h1>
-          <p className="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-          <p>
-            <a href="#" className="my-2 btn btn-primary">Main call to action</a>
-            <a href="#" className="my-2 btn btn-secondary">Secondary action</a>
-          </p>
+          <h1 className="fw-light">{title}</h1>
+          <p className="lead text-body-secondary">{description}</p>
+            {buttons}
         </div>
       </div>
     </section>
 )
 }
 
-export default Header
+const mapStateToProps = (state: {user: User}) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(Header)

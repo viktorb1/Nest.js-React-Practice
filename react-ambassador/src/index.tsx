@@ -3,16 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
+import axios from "axios"
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from './redux/configureStore';
+import { Provider } from 'react-redux';
+
+axios.defaults.baseURL = "http://localhost:8000/api/ambassador"
+axios.defaults.withCredentials = true;
+
+const store = configureStore();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

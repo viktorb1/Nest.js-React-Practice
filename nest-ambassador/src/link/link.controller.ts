@@ -49,7 +49,7 @@ export class LinkController {
         const user = await this.authService.user(request)
         const links: Link[] = await this.linkService.find({
             where: {user},
-            relations: ['orders']
+            relations: ['orders', 'orders.order_items']
         })
 
         return links.map(link => {

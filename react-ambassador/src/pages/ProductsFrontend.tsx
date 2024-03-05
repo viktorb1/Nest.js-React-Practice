@@ -1,7 +1,9 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 const ProductsFrontend = () => {
   return (
+    <Layout>
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <div className="col">
       <div className="card shadow-sm">
@@ -19,6 +21,7 @@ const ProductsFrontend = () => {
       </div>
     </div>
   </div>
+  </Layout>
   )
 }
 

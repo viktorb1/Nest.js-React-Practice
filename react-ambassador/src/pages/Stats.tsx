@@ -28,7 +28,7 @@ const Stats = () => {
                         {stats.map((s: {code: string, revenue: number, count: number}, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{`http://localhost:5000/${s.code}`}</td>
+                                    <td>{`http://localhost:5001/${s.code}`}</td>
                                     <td>{s.code}</td>
                                     <td>{s.revenue}</td>
                                     <td>{s.count}</td>

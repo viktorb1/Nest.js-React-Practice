@@ -47,6 +47,7 @@ export class OrderController {
             relations: ['user']
         })
 
+
         if (!link) {
             throw new BadRequestException('Invalid link!')
         }
@@ -55,7 +56,7 @@ export class OrderController {
         try {
             await queryRunner.connect();
             await queryRunner.startTransaction();
-            
+
             const o = new Order();
             o.user_id = link.user.id; // the user is an ambassador
             o.ambassador_email = link.user.email;
@@ -67,14 +68,16 @@ export class OrderController {
             o.city = body.city;
             o.zip = body.zip;
             o.code = body.code;
-            
+            console.log("zzgot here!", body)
+
             const order = await queryRunner.manager.save(o)
+            console.log("got here!")
 
             const line_items = [];
     
             for (let p of body.products) {
                 const product: Product = await this.productService.findOne({where: {id: p.product_id}})
-    
+                console.log(product)
                 const orderItem = new OrderItem();
                 orderItem.order = order;
                 orderItem.product_title = product.title
@@ -113,6 +116,7 @@ export class OrderController {
             await queryRunner.commitTransaction()
             return source
         } catch(e) {
+            console.log(e)
             await queryRunner.rollbackTransaction()
             throw new BadRequestException()
         } finally {
@@ -128,6 +132,8 @@ export class OrderController {
             },
             relations: ['order_items', 'user']
         });
+
+        console.log(order)
 
         if (!order) {
             throw new NotFoundException('Order not found')

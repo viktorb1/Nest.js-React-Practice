@@ -1,10 +1,14 @@
 services:
   backend:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_backend
     ports:
       - 8000:3000
     volumes:
       - .:/app
+      - /app/node_modules # prevents folder from being copied into docker container
     depends_on:
       - db
   db:
@@ -22,3 +26,4 @@ services:
     image: redis
     ports:
       - 6379:6379
+ 

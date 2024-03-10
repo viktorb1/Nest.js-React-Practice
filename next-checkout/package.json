@@ -19,7 +19,8 @@
     "popper.js": "^1.16.1",
     "react": "^18",
     "react-dom": "^18",
-    "stripe": "^14.20.0"
+    "stripe": "^14.20.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
